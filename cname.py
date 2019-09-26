@@ -54,7 +54,7 @@ def Check(domain):
 			with lock:
 				cname_string = str(data.target).rstrip(".")
 				cname_error = to_text(answer.response.rcode()).lower()
-				print("{0}{1}: {2}{3:30}, {4}".format(domain, Fore.LIGHTBLUE_EX, Fore.RESET, cname_string, cname_error))
+				print("{0:30}{1} -->\t {2}{3}".format(domain, Fore.LIGHTBLUE_EX, Fore.RESET, cname_string))
 	except DNSException:
 		pass
 	domains.task_done()
