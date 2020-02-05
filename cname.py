@@ -1,12 +1,11 @@
 import sys
-import time
 import queue
 import threading
 
 import dns.resolver
 from dns.rcode import to_text
 from dns.exception import DNSException
-from colorama import Fore, Style, init
+from colorama import Fore, init
 
 #enable coloring on win
 try:
@@ -43,7 +42,7 @@ for sub in subfile:
 
 try:
 	subfile.close()
-except:
+except AttributeError:
 	pass
 
 # checking cname
@@ -53,7 +52,7 @@ def Check(domain):
 		for data in answer:
 			with lock:
 				cname_string = str(data.target).rstrip(".")
-				cname_error = to_text(answer.response.rcode()).lower()
+				#cname_error = to_text(answer.response.rcode()).lower()
 				print("{0:30}{1} -->\t {2}{3}".format(domain, Fore.LIGHTBLUE_EX, Fore.RESET, cname_string))
 	except DNSException:
 		pass
