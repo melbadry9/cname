@@ -48,7 +48,8 @@ except AttributeError:
 # checking cname
 def Check(domain):
 	try:
-		answer = my_resolver.query(domain, 'CNAME')
+		my_resolver = dns.resolver.Resolver()
+		answer = my_resolver.resolve(domain, 'CNAME')
 		for data in answer:
 			with lock:
 				cname_string = str(data.target).rstrip(".")
